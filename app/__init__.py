@@ -4,6 +4,7 @@ from config import DevelopmentConfig
 
 # import extensions instance
 from app.models import db
+from app.models import login_manager
 
 # instance of migrate flask
 migrate = Migrate()
@@ -20,6 +21,10 @@ def create_app(config=DevelopmentConfig):
     # migrate initialization
     migrate.init_app(app, db)
     migrate.app = app
+
+    # login manager initialization
+    login_manager.init_app(app)
+    login_manager.app = app
 
     # register blueprints of applications
     from app.main import main as main_bp
